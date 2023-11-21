@@ -18,10 +18,6 @@ variable "db_instance_identifier" {
   default = "my-db-instance"
 }
 
-variable "db_instance_identifier" {
-  default = "my-db-instance"
-}
-
 variable "db_allocated_storage" {
   default = 10
 }
