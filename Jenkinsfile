@@ -73,8 +73,8 @@ pipeline {
 
     stage('Provision Server') {
       environment {
-        AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key')
-        AWS_ACCESS_KEY_KEY = credentials('jenkins_aws_access_secret')
+        AWS_ACCESS_KEY_ID = credentials('aws_access_key')
+        AWS_ACCESS_KEY_KEY = credentials('aws_secret_key')
         TF_VAR_env_prefix = 'test'
       }
       steps {
