@@ -14,16 +14,50 @@ variable "secret_key" {}
 variable "region" {}
 
 
-variable "db_instance_identifier" {}
-variable "db_allocated_storage" {}
-variable "db_engine" {}
-variable "db_engine_version" {}
-variable "db_instance_class" {}
-variable "db_name" {}
-variable "db_username" {}
-variable "db_password" {}
-variable "db_multi_az" {}
-variable "db_backup_retention_period" {}
+variable "db_instance_identifier" {
+  default = "my-db-instance"
+}
+
+variable "db_instance_identifier" {
+  default = "my-db-instance"
+}
+
+variable "db_allocated_storage" {
+  default = 10
+}
+
+variable "db_engine" {
+  default = "mysql"
+}
+
+variable "db_engine_version" {
+  default = "5.7"
+}
+
+variable "db_instance_class" {
+  default = "db.t2.micro"
+}
+
+variable "db_name" {
+  default = "mydatabase"
+}
+
+variable "db_username" {
+  default = "admin"
+}
+
+variable "db_password" {
+  default = "password"
+}
+
+variable "db_multi_az" {
+  default = false
+}
+
+variable "db_backup_retention_period" {
+  default = 7
+}
+
 
 
 variable "environments" {
