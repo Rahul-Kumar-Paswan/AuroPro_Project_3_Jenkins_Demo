@@ -87,6 +87,8 @@ pipeline {
               returnStdout:true
             ).trim()
           }
+          echo "Provisiong ........................."
+          echo "${EC2_PUBLIC_IP}"
         }
       }
     }
