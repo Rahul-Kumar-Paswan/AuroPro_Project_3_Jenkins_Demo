@@ -76,11 +76,14 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('aws_access_key')
         AWS_ACCESS_KEY_KEY = credentials('aws_secret_key')
         TF_VAR_env_prefix = 'test'
+        TF_VAR_region = "ap-south-1"
       }
       steps {
         script {
           dir('AuroPro_Project_3'){
             sh "terraform init"
+            sh "terraform plan"
+            sh "terraform validate"
             sh "terraform apply -auto-approve"
             EC2_PUBLIC_IP = sh(
               script: "terraform output public_ip",
