@@ -75,7 +75,7 @@ pipeline {
       environment {
         AWS_ACCESS_KEY_ID = credentials('aws_access_key')
         AWS_ACCESS_KEY_KEY = credentials('aws_secret_key')
-        TF_VAR_env_prefix = 'test'
+        TF_VAR_env_prefix = 'prod'
         TF_VAR_region = "ap-south-1"
       }
       steps {
