@@ -65,9 +65,9 @@ pipeline {
     stage('Build Image') {
       steps {
         echo "hello"
-        buildImage "flask_app:${IMAGE_NAME}"
+        buildImage "flask_app_project3:${IMAGE_NAME}"
         dockerLogin()
-        dockerPush "flask_app:${IMAGE_NAME}"
+        dockerPush "flask_app_project3:${IMAGE_NAME}"
       }
     }
 
@@ -111,7 +111,7 @@ pipeline {
            // Run your SSH commands using the private key
           sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
 
-          // deployApp "flask_app:${IMAGE_NAME}"
+          // deployApp "flask_app_project3:${IMAGE_NAME}"
           echo "Deploying new image........ "
         }
       }
