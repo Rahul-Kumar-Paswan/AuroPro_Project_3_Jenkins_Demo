@@ -74,14 +74,12 @@ pipeline {
     stage('Provision Server') {
       environment {
         AWS_ACCESS_KEY_ID = credentials('aws_access_key')
-        AWS_ACCESS_KEY_KEY = credentials('aws_secret_key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         TF_VAR_env_prefix = 'prod'
         TF_VAR_region = "ap-south-1"
       }
       steps {
         script {
-          echo "AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}"
-          echo "AWS_ACCESS_KEY_SECRET: ${AWS_ACCESS_KEY_SECRET}"
           dir('AuroPro_Project_3'){
             sh "terraform init"
             sh "terraform plan"
@@ -106,7 +104,7 @@ pipeline {
           echo "${EC2_PUBLIC_IP}"
 
           PEM_FILE = sh(
-            script: "terraform output private_key",
+            script: "terraform output private_key_pem",
             returnStdout:false
           )
 
