@@ -10,8 +10,8 @@ private_subnet_availability_zone = "ap-south-1b"
 ami_id           = "ami-02e94b011299ef128" # Replace with your AMI ID
 instance_type    = "t2.micro"
 instance_name    = "my-third-instance"  # Replace with your instance name
-private_key_path = "/root/.ssh/id_rsa"
-public_key_path = "/root/.ssh/id_rsa.pub"
+# private_key_path = "/root/.ssh/id_rsa"
+# public_key_path = "/root/.ssh/id_rsa.pub"
 
 
 db_instance_identifier      = "my-db-instance"

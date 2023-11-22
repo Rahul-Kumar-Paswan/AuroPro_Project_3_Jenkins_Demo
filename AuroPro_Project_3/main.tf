@@ -27,8 +27,8 @@ module "my_instance" {
     instance_name = local.current_env.instance_name
     vpc_id = module.my_vpc.vpc_id
     env_prefix = local.current_env.env_prefix
-    private_key_path = local.current_env.private_key_path
-    public_key_path = local.current_env.public_key_path
+    TF_VAR_private_key = "${TF_VAR_private_key}"
+    TF_VAR_public_key = "${TF_VAR_public_key}"
 }
 
 module "my_database" {

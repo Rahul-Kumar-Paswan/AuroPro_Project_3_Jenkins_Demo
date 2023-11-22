@@ -77,6 +77,8 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
         TF_VAR_env_prefix = 'prod'
         TF_VAR_region = "ap-south-1"
+        TERRAFORM_PRIVATE_KEY = credentials('terraform_private_key_id')
+        TERRAFORM_PUBLIC_KEY = credentials('terraform_public_key_id')
       }
       steps {
         script {

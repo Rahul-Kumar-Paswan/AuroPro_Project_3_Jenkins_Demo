@@ -30,14 +30,14 @@ resource "aws_instance" "my_instance" {
   connection {
     type        = "ssh"
     user        = "ec2-user" # Replace with the username for your AMI
-    private_key = file(var.private_key_path) # Add the path to your private key
+    private_key = var.TF_VAR_private_key # Add the path to your private key
     host        = self.public_ip # You can use `self.public_dns` as well
   }
 }
 
 resource "aws_key_pair" "ssh-key" {
   key_name   = "my-key-pair"
-  public_key = file(var.public_key_path) # Specify the path to your public key
+  public_key = var.TF_VAR_public_key # Specify the path to your public key
 }
 
 data "aws_ami" "latest-amazon-image" {

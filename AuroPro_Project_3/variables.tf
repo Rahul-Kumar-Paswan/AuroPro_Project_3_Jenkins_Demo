@@ -9,11 +9,13 @@ variable "private_subnet_availability_zone" {}
 variable "ami_id" {}
 variable "instance_type" {}
 variable "instance_name" {}
-variable "private_key_path" {}
-variable "public_key_path" {}
+# variable "private_key_path" {}
+# variable "public_key_path" {}
 # variable "access_key" {}
 # variable "secret_key" {}
 variable "region" {}
+variable "TF_VAR_private_key" {}
+variable "TF_VAR_public_key" {}
 
 
 variable "db_instance_identifier" {
@@ -72,8 +74,8 @@ variable "environments" {
       instance_type = "t2.micro"
       ami_id = "ami-02e94b011299ef128"
       instance_name = "my-first-instance"
-      private_key_path = "/root/.ssh/id_rsa"
-      public_key_path = "/root/.ssh/id_rsa.pub"
+      # private_key_path = "/root/.ssh/id_rsa"
+      # public_key_path = "/root/.ssh/id_rsa.pub"
     },
     prod = {
       vpc_cidr_block = "10.0.0.0/16"
@@ -87,8 +89,8 @@ variable "environments" {
       instance_type = "t2.micro"
       ami_id = "ami-02e94b011299ef128"
       instance_name = "my-second-instance"
-      private_key_path = "/root/.ssh/id_rsa"
-      public_key_path = "/root/.ssh/id_rsa.pub"
+      # private_key_path = "/root/.ssh/id_rsa"
+      # public_key_path = "/root/.ssh/id_rsa.pub"
     }
   }
 }
