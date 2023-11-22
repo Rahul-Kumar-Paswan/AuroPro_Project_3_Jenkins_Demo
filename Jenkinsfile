@@ -80,6 +80,8 @@ pipeline {
       }
       steps {
         script {
+          echo "AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}"
+          echo "AWS_ACCESS_KEY_SECRET: ${AWS_ACCESS_KEY_SECRET}"
           dir('AuroPro_Project_3'){
             sh "terraform init"
             sh "terraform plan"
