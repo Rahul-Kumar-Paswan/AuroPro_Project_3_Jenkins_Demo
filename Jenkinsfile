@@ -84,9 +84,9 @@
 //         script {
 //           dir('AuroPro_Project_3'){
 //             // Write private key to a file
-//             sh "echo \"${TERRAFORM_PRIVATE_KEY}\" > private_key.pem"
+//             sh "echo \"${TERRAFORM_PRIVATE_KEY}\" > private_key"
 //             // Set permissions on private key
-//             sh "chmod 600 private_key.pem"
+//             sh "chmod 600 private_key"
             
 //             // Write public key to a file
 //             sh "echo \"${TERRAFORM_PUBLIC_KEY}\" > public_key.pub"
@@ -157,10 +157,12 @@ pipeline {
       }
       steps {
         script {
-          sh "terraform init"
-          sh "terraform plan"
-          sh "terraform validate"
-        sh " terraform destroy -auto-approve"
+          dir('AuroPro_Project_3'){
+            sh "terraform init"
+            sh "terraform plan"
+            sh "terraform validate"
+            sh " terraform destroy -auto-approve"
+          }
         }
       }
     }
