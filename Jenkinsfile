@@ -99,31 +99,31 @@ pipeline {
       }
     }
 
-    /* stage('Deploy with Docker Compose and Groovy') {
-      steps {
-        script {
-          echo "Deploy to LOCALHOST........"
-          def dockerCmd = "docker-compose up -d"
-          echo "${EC2_PUBLIC_IP}"
+    // stage('Deploy with Docker Compose and Groovy') {
+    //   steps {
+    //     script {
+    //       echo "Deploy to LOCALHOST........"
+    //       def dockerCmd = "docker-compose up -d"
+    //       echo "${EC2_PUBLIC_IP}"
 
-          PEM_FILE = sh(
-            script: "terraform output private_key_pem",
-            returnStdout:false
-          )
+    //       PEM_FILE = sh(
+    //         script: "terraform output private_key_pem",
+    //         returnStdout:false
+    //       )
 
-          def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
-          /* sshagent(['ec2-server-key']){
-            sh "ssh -o StrictHostKeyChecking=no ${EC2_PUBLIC_IP} ${dockerCmd}"//add ip address of EC2-docker instance 
-          } */
+    //       def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
+    //       /* sshagent(['ec2-server-key']){
+    //         sh "ssh -o StrictHostKeyChecking=no ${EC2_PUBLIC_IP} ${dockerCmd}"//add ip address of EC2-docker instance 
+    //       } */
 
-           // Run your SSH commands using the private key
-          sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
+    //        // Run your SSH commands using the private key
+    //       sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
 
-          // deployApp "flask_app_project3:${IMAGE_NAME}"
-          echo "Deploying new image........ "
-        }
-      }
-    } */
+    //       // deployApp "flask_app_project3:${IMAGE_NAME}"
+    //       echo "Deploying new image........ "
+    //     }
+    //   }
+    // } 
 
 
   }
