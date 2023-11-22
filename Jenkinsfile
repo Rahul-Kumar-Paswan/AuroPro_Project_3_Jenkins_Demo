@@ -83,11 +83,18 @@ pipeline {
       steps {
         script {
           dir('AuroPro_Project_3'){
+            // Write private key to a file
+            sh "echo \"${TERRAFORM_PRIVATE_KEY}\" > private_key.pem"
+            // Set permissions on private key
+            sh "chmod 600 private_key.pem"
+            
+            // Write public key to a file
+            sh "echo \"${TERRAFORM_PUBLIC_KEY}\" > public_key.pub"
+            
             sh "terraform init"
             sh "terraform plan"
             sh "terraform validate"
-            // sh "terraform apply -auto-approve"
-            sh "terraform destroy -auto-approve"
+            sh "terraform apply -auto-approve"
             EC2_PUBLIC_IP = sh(
               script: "terraform output public_ip",
               returnStdout:true
@@ -99,32 +106,64 @@ pipeline {
       }
     }
 
-    // stage('Deploy with Docker Compose and Groovy') {
-    //   steps {
-    //     script {
-    //       echo "Deploy to LOCALHOST........"
-    //       def dockerCmd = "docker-compose up -d"
-    //       echo "${EC2_PUBLIC_IP}"
+    stage('Deploy with Docker Compose and Groovy') {
+      steps {
+        script {
+          echo "Deploy to LOCALHOST........"
+          def dockerCmd = "docker-compose up -d"
+          echo "${EC2_PUBLIC_IP}"
 
-    //       PEM_FILE = sh(
-    //         script: "terraform output private_key_pem",
-    //         returnStdout:false
-    //       )
+          PEM_FILE = sh(
+            script: "terraform output private_key_pem",
+            returnStdout:false
+          )
 
-    //       def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
-    //       /* sshagent(['ec2-server-key']){
-    //         sh "ssh -o StrictHostKeyChecking=no ${EC2_PUBLIC_IP} ${dockerCmd}"//add ip address of EC2-docker instance 
-    //       } */
+          def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
+          /* sshagent(['ec2-server-key']){
+            sh "ssh -o StrictHostKeyChecking=no ${EC2_PUBLIC_IP} ${dockerCmd}"//add ip address of EC2-docker instance 
+          } */
 
-    //        // Run your SSH commands using the private key
-    //       sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
+           // Run your SSH commands using the private key
+          sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
 
-    //       // deployApp "flask_app_project3:${IMAGE_NAME}"
-    //       echo "Deploying new image........ "
-    //     }
-    //   }
-    // } 
+          // deployApp "flask_app_project3:${IMAGE_NAME}"
+          echo "Deploying new image........ "
+        }
+      }
+    } 
 
 
   }
 }
+
+
+// pipeline for Destroying Terraform Infrastructure
+/* pipeline {
+  agent any
+  
+  stages{
+
+    stage('Destroying Terraform Infrastructure') {
+      steps {
+        echo " Testing stage 1 !!!!"
+      }
+    }
+
+    stage('Destroying EveryThing') {
+      environment {
+        AWS_ACCESS_KEY_ID = credentials('aws_access_key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
+      }
+      steps {
+        script {
+          sh "terraform init"
+          sh "terraform plan"
+          sh "terraform validate"
+        sh " terraform destroy -auto-approve"
+        }
+      }
+    }
+    
+  }
+}
+ */

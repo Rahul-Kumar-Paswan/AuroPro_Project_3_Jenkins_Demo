@@ -21,7 +21,7 @@ resource "aws_db_instance" "my_db_instance" {
   publicly_accessible     = false
   multi_az                = var.db_multi_az
   backup_retention_period = var.db_backup_retention_period
-  # skip_final_snapshot = true
+  skip_final_snapshot = true
 
   vpc_security_group_ids  = [aws_security_group.my_rds_sg.id]
   db_subnet_group_name    = aws_db_subnet_group.my_db_subnet_group.name  # Use the name attribute of the db subnet group
