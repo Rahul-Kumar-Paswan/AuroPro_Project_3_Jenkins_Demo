@@ -14,8 +14,8 @@ variable "instance_name" {}
 # variable "access_key" {}
 # variable "secret_key" {}
 variable "region" {}
-variable "TF_VAR_private_key" {}
-variable "TF_VAR_public_key" {}
+# variable "TF_VAR_private_key" {}
+# variable "TF_VAR_public_key" {}
 
 
 variable "db_instance_identifier" {
