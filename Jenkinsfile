@@ -86,7 +86,8 @@ pipeline {
             sh "terraform init"
             sh "terraform plan"
             sh "terraform validate"
-            sh "terraform apply -auto-approve"
+            // sh "terraform apply -auto-approve"
+            sh "terraform destroy -auto-approve"
             EC2_PUBLIC_IP = sh(
               script: "terraform output public_ip",
               returnStdout:true
@@ -98,7 +99,7 @@ pipeline {
       }
     }
 
-    stage('Deploy with Docker Compose and Groovy') {
+    /* stage('Deploy with Docker Compose and Groovy') {
       steps {
         script {
           echo "Deploy to LOCALHOST........"
@@ -122,7 +123,7 @@ pipeline {
           echo "Deploying new image........ "
         }
       }
-    }
+    } */
 
 
   }
