@@ -31,7 +31,7 @@ module "my_instance" {
     # TF_VAR_public_key = "${TF_VAR_public_key}"
 }
 
-module "my_database" {
+/* module "my_database" {
   source                    = "./modules/database"
   vpc_id                    = module.my_vpc.vpc_id
   subnet_id_1               = module.my_vpc.public_subnet_id
@@ -48,4 +48,4 @@ module "my_database" {
   db_multi_az               = "${var.db_multi_az}"
   db_backup_retention_period = "${var.db_backup_retention_period}"
   my_security_group_id      = module.my_instance.my_security_group_id
-}
+} */
