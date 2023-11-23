@@ -123,7 +123,7 @@ pipeline {
           echo "${EC2_PUBLIC_IP}"
           sh "pwd"
           sh "ls"
-          sh "cat private_key.pem"
+          sh "cat AuroPro_Project_3/private_key.pem"
         }
       }
     }
@@ -150,7 +150,7 @@ pipeline {
 
            // Run your SSH commands using the private key
           // sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
-          sh "ssh -o StrictHostKeyChecking=no -i private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
+          sh "ssh -o StrictHostKeyChecking=no -i AuroPro_Project_3/private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
 
           // deployApp "flask_app_project3:${IMAGE_NAME}"
           echo "Deploying new image........ "
