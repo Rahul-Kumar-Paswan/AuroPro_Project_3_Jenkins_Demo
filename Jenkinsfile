@@ -106,9 +106,15 @@ pipeline {
               script: "terraform output public_ip",
               returnStdout:true
             ).trim()
+
+            PEM_FILE = sh(
+            script: "terraform output private_key_pem",
+            returnStdout:false
+            )
           }
           echo "Provisiong ##################################"
           echo "${EC2_PUBLIC_IP}"
+          sh "cat PEM_FILE"
         }
       }
     }
@@ -117,13 +123,16 @@ pipeline {
       steps {
         script {
           echo "Deploy to LOCALHOST........"
+          sh "pwd"
+          sh "ls"
           def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
+          sh "cat PEM_FILE"
 
-          PEM_FILE = sh(
-            script: "terraform output private_key_pem",
-            returnStdout:false
-          )
+          // PEM_FILE = sh(
+          //   script: "terraform output private_key_pem",
+          //   returnStdout:false
+          // )
 
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
           /* sshagent(['ec2-server-key']){
