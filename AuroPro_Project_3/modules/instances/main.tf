@@ -12,27 +12,29 @@ resource "aws_instance" "my_instance" {
 
   associate_public_ip_address = true
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum update -y",
-      "sudo yum install docker -y",
-      "sudo service docker start",
-      "sudo usermod -a -G docker ec2-user",
-      "sudo chmod 666 /var/run/docker.sock",
-      "sudo service docker restart",
-      "sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
-      "sudo chmod +x /usr/local/bin/docker-compose",
-      "docker-compose --version"
-      # Additional commands for Docker setup or container deployment can be added here
-    ]
-  }
+  user_data = file("entry-script.sh")
 
-  connection {
-    type        = "ssh"
-    user        = "ec2-user"                      # Replace with the username for your AMI
-    private_key = "Rahul_Key"  # Use the private key directly
-    host        = self.public_ip                 # You can use `self.public_dns` as well
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo yum update -y",
+  #     "sudo yum install docker -y",
+  #     "sudo service docker start",
+  #     "sudo usermod -a -G docker ec2-user",
+  #     "sudo chmod 666 /var/run/docker.sock",
+  #     "sudo service docker restart",
+  #     "sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
+  #     "sudo chmod +x /usr/local/bin/docker-compose",
+  #     "docker-compose --version"
+  #     # Additional commands for Docker setup or container deployment can be added here
+  #   ]
+  # }
+
+  # connection {
+  #   type        = "ssh"
+  #   user        = "ec2-user"                      # Replace with the username for your AMI
+  #   private_key = file("private_key")  # Use the private key directly
+  #   host        = self.public_ip                 # You can use `self.public_dns` as well
+  # }
 }
 
 resource "aws_key_pair" "ssh-key" {
