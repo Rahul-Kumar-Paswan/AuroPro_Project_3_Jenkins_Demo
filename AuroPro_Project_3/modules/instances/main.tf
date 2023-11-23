@@ -30,7 +30,7 @@ resource "aws_instance" "my_instance" {
   connection {
     type        = "ssh"
     user        = "ec2-user"                      # Replace with the username for your AMI
-    private_key = "my-key-pair"  # Use the private key directly
+    private_key = file("private_key")  # Use the private key directly
     host        = self.public_ip                 # You can use `self.public_dns` as well
   }
 }
