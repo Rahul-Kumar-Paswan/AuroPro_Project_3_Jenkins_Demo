@@ -87,6 +87,9 @@ pipeline {
             sh "echo \"${TERRAFORM_PRIVATE_KEY}\" > private_key"
             sh "pwd"
             sh "ls"
+            sh "ls -l private_key"
+            sh "cat private_key"
+
             // Set permissions on private key
             sh "chmod 600 private_key"
             
