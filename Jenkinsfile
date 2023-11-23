@@ -137,7 +137,7 @@ pipeline {
           sh "ls"
           def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
-          sh "cat AuroPro_Project_3/private_key.pem"
+          // sh "cat AuroPro_Project_3/private_key.pem"
 
           // PEM_FILE = sh(
           //   script: "terraform output private_key_pem",
@@ -152,7 +152,8 @@ pipeline {
            // Run your SSH commands using the private key
           // sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
           // sh "ssh -o StrictHostKeyChecking=no -i AuroPro_Project_3/private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
-          def privateKeyPath = "${WORKSPACE}/private_key.pem"
+          def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
+          sh "cat ${privateKeyPath}"
           sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
           sh "ls -l ${privateKeyPath}"
 
