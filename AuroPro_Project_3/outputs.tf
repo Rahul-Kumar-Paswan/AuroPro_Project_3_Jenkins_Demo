@@ -17,3 +17,7 @@ output "public_ip" {
 output "private_ip" {
   value = module.my_instance.private_ip
 }
+
+output "private_key_pem" {
+  value = module.ssh-key.key_name
+}
