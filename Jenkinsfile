@@ -65,7 +65,7 @@ pipeline {
     stage('Build Image') {
       steps {
         echo "hello"
-        buildImage "flask_app_project3:${IMAGE_NAME}"
+        // buildImage "flask_app_project3:${IMAGE_NAME}"
         // dockerLogin()
         // dockerPush "flask_app_project3:${IMAGE_NAME}"
       }

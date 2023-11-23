@@ -26,7 +26,10 @@ output "private_ip" {
 #   value = module.my_instance.ssh_key.private_key_pem
 # }
 
-output "private_key_pem" {
-  value = module.ssh_key.private_key_pem
-}
+# output "private_key_pem" {
+#   value = module.ssh_key.private_key_pem
+# }
 
+output "private_key_pem" {
+  value = module.my_instance.ssh_key.private_key_pem
+}

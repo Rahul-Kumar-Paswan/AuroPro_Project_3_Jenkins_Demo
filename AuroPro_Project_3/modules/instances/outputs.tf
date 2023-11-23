@@ -23,4 +23,3 @@ output "my_security_group_id" {
 output "private_key_pem" {
   value = aws_key_pair.ssh_key.private_key_pem
 }
-
