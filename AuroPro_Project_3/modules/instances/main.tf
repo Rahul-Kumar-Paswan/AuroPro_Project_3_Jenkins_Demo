@@ -2,7 +2,7 @@ resource "aws_instance" "my_instance" {
   ami           = data.aws_ami.latest-amazon-image.id
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
-  key_name      = aws_key_pair.ssh-key.key_name  # Associate the key pair with the instance
+  key_name      = aws_key_pair.ssh_key.key_name  # Associate the key pair with the instance
   tags = {
     Name = var.instance_name
   }
@@ -37,7 +37,7 @@ resource "aws_instance" "my_instance" {
   # }
 }
 
-resource "aws_key_pair" "ssh-key" {
+resource "aws_key_pair" "ssh_key" {
   key_name   = "my-key-pair"
   public_key = file("public_key.pub")  # Use the public key directly
 }
