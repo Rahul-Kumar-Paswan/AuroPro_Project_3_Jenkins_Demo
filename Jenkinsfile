@@ -109,12 +109,19 @@ pipeline {
 
             PEM_FILE = sh(
             script: "terraform output private_key_pem",
-            returnStdout:false
-            )
+            returnStdout:true
+            ).trim()
+
+            // Write private key content to a file
+            sh "echo '${PEM_FILE}' > private_key.pem"
+
+            // Set permissions on private key
+            sh "chmod 600 private_key.pem"
+
           }
           echo "Provisiong ##################################"
           echo "${EC2_PUBLIC_IP}"
-          sh "cat PEM_FILE"
+          sh "cat private_key.pem"
         }
       }
     }
@@ -127,7 +134,7 @@ pipeline {
           sh "ls"
           def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
-          sh "cat PEM_FILE"
+          sh "cat private_key.pem"
 
           // PEM_FILE = sh(
           //   script: "terraform output private_key_pem",
@@ -140,7 +147,8 @@ pipeline {
           } */
 
            // Run your SSH commands using the private key
-          sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
+          // sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
+          sh "ssh -o StrictHostKeyChecking=no -i private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
 
           // deployApp "flask_app_project3:${IMAGE_NAME}"
           echo "Deploying new image........ "
