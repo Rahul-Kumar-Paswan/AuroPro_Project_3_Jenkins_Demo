@@ -121,6 +121,7 @@ pipeline {
           }
           echo "Provisiong ##################################"
           echo "${EC2_PUBLIC_IP}"
+          echo "${PEM_FILE}"
           sh "pwd"
           sh "ls"
           sh "cat AuroPro_Project_3/private_key.pem"
