@@ -20,4 +20,5 @@ output "private_ip" {
 
 output "private_key_pem" {
   value = module.my_instance.private_key_pem
+  sensitive = true
 }
