@@ -84,19 +84,21 @@ pipeline {
         script {
           dir('AuroPro_Project_3'){
             // Write private key to a file
-            sh "echo \"${TERRAFORM_PRIVATE_KEY}\" > private_key"
+            sh "echo \"${TERRAFORM_PRIVATE_KEY}\" > private_key_id_rsa"
             sh "pwd"
             sh "ls"
-            sh "ls -l private_key"
-            sh "cat private_key"
+            sh "ls -l private_key_id_rsa"
+            sh "cat private_key_id_rsa"
 
             // Set permissions on private key
             sh "chmod 600 private_key"
             
             // Write public key to a file
-            sh "echo \"${TERRAFORM_PUBLIC_KEY}\" > public_key.pub"
+            sh "echo \"${TERRAFORM_PUBLIC_KEY}\" > public_key_id_rsa.pub"
             sh "pwd"
             sh "ls"
+            sh "ls -l public_key_id_rsa.pub"
+            sh "cat public_key_id_rsa.pub"
 
             sh "terraform init"
             sh "terraform plan"
