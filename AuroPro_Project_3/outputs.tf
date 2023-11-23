@@ -11,9 +11,9 @@ output "private_subnet_id" {
 }
 
 output "public_ip" {
-  value = module.aws_instance.my_instance.public_ip
+  value = module.my_instance.public_ip
 }
 
 output "private_ip" {
-  value = module.aws_instance.my_instance.private_ip
+  value = module.my_instance.private_ip
 }
