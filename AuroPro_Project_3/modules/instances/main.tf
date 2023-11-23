@@ -1,3 +1,12 @@
+resource "tls_private_key" "ssh_private_key" {
+  algorithm = "RSA"
+}
+
+resource "aws_key_pair" "ssh_key" {
+  key_name   = "my-key-pair"
+  public_key = tls_private_key.ssh_private_key.public_key_openssh
+}
+
 resource "aws_instance" "my_instance" {
   ami           = data.aws_ami.latest-amazon-image.id
   instance_type = var.instance_type
@@ -37,10 +46,10 @@ resource "aws_instance" "my_instance" {
   # }
 }
 
-resource "aws_key_pair" "ssh_key" {
-  key_name   = "my-key-pair"
-  public_key = file("public_key.pub")  # Use the public key directly
-}
+# resource "aws_key_pair" "ssh_key" {
+#   key_name   = "my-key-pair"
+#   public_key = file("public_key.pub")  # Use the public key directly
+# }
 
 data "aws_ami" "latest-amazon-image" {
   most_recent = true

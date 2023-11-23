@@ -139,12 +139,6 @@ pipeline {
           sh "ls"
           def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
-          // sh "cat AuroPro_Project_3/private_key.pem"
-
-          // PEM_FILE = sh(
-          //   script: "terraform output private_key_pem",
-          //   returnStdout:false
-          // )
 
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
           /* sshagent(['ec2-server-key']){
