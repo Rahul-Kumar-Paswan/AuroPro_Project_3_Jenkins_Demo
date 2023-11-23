@@ -136,7 +136,7 @@ pipeline {
           sh "ls"
           def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
-          sh "cat private_key.pem"
+          sh "cat AuroPro_Project_3/private_key.pem"
 
           // PEM_FILE = sh(
           //   script: "terraform output private_key_pem",
