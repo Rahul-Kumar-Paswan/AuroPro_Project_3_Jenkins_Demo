@@ -121,6 +121,8 @@ pipeline {
           }
           echo "Provisiong ##################################"
           echo "${EC2_PUBLIC_IP}"
+          sh "pwd"
+          sh "ls"
           sh "cat private_key.pem"
         }
       }
