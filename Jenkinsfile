@@ -153,6 +153,10 @@ pipeline {
           // sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
           // sh "ssh -o StrictHostKeyChecking=no -i AuroPro_Project_3/private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
+          sh "ls -l ${privateKeyPath}"
+          sh "chmod 600 ${privateKeyPath}"
+          sh "ls -l ${privateKeyPath}"
+
           sh "cat ${privateKeyPath}"
           sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
           sh "ls -l ${privateKeyPath}"
