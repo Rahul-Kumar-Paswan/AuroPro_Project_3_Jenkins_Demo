@@ -152,7 +152,7 @@ pipeline {
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
           sh "pwd"
           sh "ls"
-          def dockerCmd = "docker-compose -f ${WORKSPACE} up -d"
+          def dockerCmd = "docker-compose -f ${WORKSPACE}/docker-compose.yaml up -d"
           sh "pwd"
           sh "ls"
           sh "ls -l ${privateKeyPath}"
