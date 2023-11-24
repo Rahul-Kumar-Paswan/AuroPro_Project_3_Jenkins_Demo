@@ -140,7 +140,7 @@ pipeline {
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
           // def dockerCmd = "docker-compose -f /root/flask-jenkins-deploy/mydockercompose.yml up -d"
           // def dockerCmd = 'docker run -d --name ishu-project-2 -p 3000:3000 rahulkumarpaswan/my-python-project:1.5'
-          def dockerCmd = "FLASK_APP_IMAGE=rahulkumarpaswan/my-python-project:1.5 docker-compose -f mydockercompose.yml up -d"
+          def dockerCmd = "FLASK_APP_IMAGE=rahulkumarpaswan/my-python-project:1.5 docker-compose -f /root/flask-jenkins-deploy/mydockercompose.yml up -d"
 
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
