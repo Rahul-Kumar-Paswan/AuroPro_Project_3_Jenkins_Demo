@@ -65,6 +65,7 @@ pipeline {
     stage('Build Image') {
       steps {
         echo "hello"
+        sh "ls -l /var/run/docker.sock"
         buildImage "auropro_project_3:${IMAGE_NAME}"
         dockerLogin()
         dockerPush "auropro_project_3:${IMAGE_NAME}"
