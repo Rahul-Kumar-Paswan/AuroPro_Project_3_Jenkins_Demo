@@ -136,31 +136,31 @@ pipeline {
         script {
           echo "Deploy to EC2 ........"
 
-          // def dockerCmd = "docker-compose up -d"
-          echo "${EC2_PUBLIC_IP}"
-
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
           def dockerCmd = "docker-compose -f ${WORKSPACE}/AuroPro_Project_3/docker-compose.yaml up -d"
-          
+
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
 
           sh "cat ${privateKeyPath}"
+
+          echo "Contents of the remote directory:"
+          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -la ${WORKSPACE}/AuroPro_Project_3'"
 
           echo "waiting for EC2 server to initialize" 
           sleep(time: 90, unit: "SECONDS") 
           sh "pwd"
           sh "ls"
 
-          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
+          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} '${dockerCmd}'"
           sh "ls -l ${privateKeyPath}"
 
           // deployApp "flask_app_project3:${IMAGE_NAME}"
-          echo "Deploying new image........ "
         }
       }
-    } 
+    }
+
 
 
   }
