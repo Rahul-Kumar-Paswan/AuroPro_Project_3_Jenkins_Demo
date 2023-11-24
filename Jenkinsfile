@@ -134,28 +134,17 @@ pipeline {
     stage('Deploy with Docker Compose and Groovy') {
       steps {
         script {
-          echo "Deploy to LOCALHOST........"
-          sh "pwd"
-          sh "ls"
+          echo "Deploy to EC2 ........"
 
           // def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
 
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
-          /* sshagent(['ec2-server-key']){
-            sh "ssh -o StrictHostKeyChecking=no ${EC2_PUBLIC_IP} ${dockerCmd}"//add ip address of EC2-docker instance 
-          } */
 
-           // Run your SSH commands using the private key
-          // sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
-          // sh "ssh -o StrictHostKeyChecking=no -i AuroPro_Project_3/private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
-          sh "pwd"
-          sh "ls"
-          def dockerCmd = "docker-compose -f ${WORKSPACE}/docker-compose.yaml up -d"
-          sh "pwd"
-          sh "ls"
-          sh "ls -l ${privateKeyPath}"
+          
+          def dockerCmd = "docker-compose up -d"
+          
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
 
