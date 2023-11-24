@@ -1,4 +1,4 @@
-/* #!/usr/bin/env groovy
+#!/usr/bin/env groovy
 
 library identifier : 'jenkins-shared-library@main',retriever:modernSCM([
     $class:'GitSCMSource',
@@ -177,12 +177,12 @@ pipeline {
 
 
   }
-} */
+} 
 
 
 // pipeline for Destroying Terraform Infrastructure
 
-pipeline {
+/* pipeline {
   agent any
   stages{
 
@@ -210,3 +210,4 @@ pipeline {
     }
   }
 }  
+ */
