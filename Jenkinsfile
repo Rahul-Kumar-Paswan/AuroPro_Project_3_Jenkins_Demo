@@ -132,15 +132,19 @@ pipeline {
     }
 
     stage('Deploy with Docker Compose and Groovy') {
+      environment {
+        IMAGE_NAME_1 = 'flask_app_project3:${IMAGE_NAME}'
+      }
       steps {
         script {
           echo "Deploy to EC2 ........" 
+          echo "${IMAGE_NAME_1}"
 
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
           // def dockerCmd = "docker-compose -f /root/flask-jenkins-deploy/mydockercompose.yml up -d"
           // def dockerCmd = 'docker run -d --name ishu-project-2 -p 3000:3000 rahulkumarpaswan/my-python-project:1.5'
-          def dockerCmd = "FLASK_APP_IMAGE=rahulkumarpaswan/my-python-project:1.5 docker-compose -f /root/flask-jenkins-deploy/mydockercompose.yml up -d"
+          // def dockerCmd = "FLASK_APP_IMAGE=rahulkumarpaswan/my-python-project:1.5 docker-compose -f /root/flask-jenkins-deploy/mydockercompose.yml up -d"
 
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
@@ -149,6 +153,11 @@ pipeline {
           sh "pwd"
           sh "ls"
 
+          def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME_1}"
+          sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2Instance}:/home/ec2-user"
+          sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2Instance}:/home/ec2-user"
+          // sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
+
           echo "Contents of the remote directory:"
           
           echo "waiting for EC2 server to initialize" 
@@ -156,7 +165,7 @@ pipeline {
           sh "pwd"
           sh "ls"
 
-          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} ${dockerCmd}"
+          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} ${shellCmd}"
 
           // deployApp "flask_app_project3:${IMAGE_NAME}"
         }
