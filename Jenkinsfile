@@ -163,6 +163,8 @@ pipeline {
 
           echo "waiting for EC2 server to initialize" 
           sleep(time: 90, unit: "SECONDS") 
+          sh "pwd"
+          sh "ls"
 
           sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
           sh "ls -l ${privateKeyPath}"
