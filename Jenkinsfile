@@ -154,11 +154,13 @@ pipeline {
           sh "ls"
 
           def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME_1}"
-          sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2Instance}:/home/ec2-user"
-          sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2Instance}:/home/ec2-user"
+          sh "scp -o StrictHostKeyChecking=no -i ${privateKeyPath} server-cmds.sh ${ec2Instance}:/home/ec2-user"
+          sh "scp -o StrictHostKeyChecking=no -i ${privateKeyPath} docker-compose.yaml ${ec2Instance}:/home/ec2-user"
           // sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
 
           echo "Contents of the remote directory:"
+          // Print contents of the remote directory
+          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -l /home/ec2-user'"
           
           echo "waiting for EC2 server to initialize" 
           // sleep(time: 90, unit: "SECONDS") 
