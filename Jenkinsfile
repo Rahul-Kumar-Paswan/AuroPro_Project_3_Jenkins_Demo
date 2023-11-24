@@ -146,7 +146,7 @@ pipeline {
           sh "cat ${privateKeyPath}"
 
           echo "Contents of the remote directory:"
-          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -la ${WORKSPACE}/AuroPro_Project_3'"
+          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -la ${WORKSPACE}'"
 
           echo "waiting for EC2 server to initialize" 
           sleep(time: 90, unit: "SECONDS") 
