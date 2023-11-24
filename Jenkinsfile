@@ -150,7 +150,7 @@ pipeline {
           echo "Contents of the remote directory:"
           
           echo "waiting for EC2 server to initialize" 
-          sleep(time: 90, unit: "SECONDS") 
+          // sleep(time: 90, unit: "SECONDS") 
           sh "pwd"
           sh "ls"
 
