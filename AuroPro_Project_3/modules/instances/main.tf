@@ -23,10 +23,10 @@ resource "aws_instance" "my_instance" {
 
   user_data = file("entry-script.sh")
 
-  provisioner "file" {
-    source = "/root/flask-jenkins-deploy/mydockercompose.yml"
-    destination = "/home/ec2-user/"
-  }
+  # provisioner "file" {
+  #   source = "/root/flask-jenkins-deploy/mydockercompose.yml"
+  #   destination = "/home/ec2-user/"
+  # }
 
   # provisioner "remote-exec" {
   #   inline = [

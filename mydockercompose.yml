@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: ${DEPLOY_IMAGE_NAME}  # Use the environment variable as the image name
+    image: ${FLASK_APP_IMAGE:-rahulkumarpaswan/my-python-project:1.4}
     ports:
       - "5000:5000"
     depends_on:
