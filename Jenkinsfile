@@ -143,7 +143,9 @@ pipeline {
 
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
           
-          def dockerCmd = "docker-compose up -d"
+          // def dockerCmd = "docker-compose up -d"
+          def dockerCmd = "docker-compose -f /var/lib/jenkins/workspace/project-3-practise-2/docker-compose.yaml up -d"
+
           
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
