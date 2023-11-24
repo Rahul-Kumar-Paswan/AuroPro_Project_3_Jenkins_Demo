@@ -65,9 +65,9 @@ pipeline {
     stage('Build Image') {
       steps {
         echo "hello"
-        buildImage "flask_app_project3:${IMAGE_NAME}"
+        buildImage "auropro_project_3:${IMAGE_NAME}"
         dockerLogin()
-        dockerPush "flask_app_project3:${IMAGE_NAME}"
+        dockerPush "auropro_project_3:${IMAGE_NAME}"
       }
     }
 
@@ -133,7 +133,7 @@ pipeline {
 
     stage('Deploy with Docker Compose and Groovy') {
       environment {
-        IMAGE_NAME_1 = "flask_app_project3:${IMAGE_NAME}"
+        IMAGE_NAME_1 = "auropro_project_3:${IMAGE_NAME}"
       }
       steps {
         script {
@@ -162,7 +162,7 @@ pipeline {
 
           sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} ${shellCmd}"
 
-          // deployApp "flask_app_project3:${IMAGE_NAME}"
+          // deployApp "auropro_project_3:${IMAGE_NAME}"
         }
       }
     }
