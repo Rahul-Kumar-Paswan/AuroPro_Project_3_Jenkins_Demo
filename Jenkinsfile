@@ -137,7 +137,8 @@ pipeline {
           echo "Deploy to LOCALHOST........"
           sh "pwd"
           sh "ls"
-          def dockerCmd = "docker-compose up -d"
+
+          // def dockerCmd = "docker-compose up -d"
           echo "${EC2_PUBLIC_IP}"
 
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
@@ -149,12 +150,17 @@ pipeline {
           // sh "ssh -o StrictHostKeyChecking=no -i ${PEM_FILE} ${ec2Instance} ${dockerCmd}"
           // sh "ssh -o StrictHostKeyChecking=no -i AuroPro_Project_3/private_key.pem ec2-user@${EC2_PUBLIC_IP} ${dockerCmd}"
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
+          sh "pwd"
+          sh "ls"
+          def dockerCmd = "docker-compose -f ${WORKSPACE} up -d"
+          sh "pwd"
+          sh "ls"
           sh "ls -l ${privateKeyPath}"
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
 
           sh "cat ${privateKeyPath}"
-          
+
           echo "waiting for EC2 server to initialize" 
           sleep(time: 90, unit: "SECONDS") 
 
