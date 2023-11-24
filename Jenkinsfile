@@ -138,7 +138,7 @@ pipeline {
 
           def ec2Instance = "ec2-user@${EC2_PUBLIC_IP}"
           def privateKeyPath = "${WORKSPACE}/AuroPro_Project_3/private_key.pem"
-          def dockerCmd = "docker-compose -f ${WORKSPACE}/docker-compose.yaml up -d"
+          def dockerCmd = "docker-compose -f ${WORKSPACE}/mydockercompose.yml up -d"
 
           sh "chmod 600 ${privateKeyPath}"
           sh "ls -l ${privateKeyPath}"
