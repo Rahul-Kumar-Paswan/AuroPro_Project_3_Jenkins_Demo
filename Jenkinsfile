@@ -1,4 +1,4 @@
-#!/usr/bin/env groovy
+/* #!/usr/bin/env groovy
 
 library identifier : 'jenkins-shared-library@main',retriever:modernSCM([
     $class:'GitSCMSource',
@@ -161,7 +161,7 @@ pipeline {
           echo "Contents of the remote directory:"
           // Print contents of the remote directory
           sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -l /home/ec2-user'"
-          
+
           echo "waiting for EC2 server to initialize" 
           // sleep(time: 90, unit: "SECONDS") 
           sh "pwd"
@@ -177,12 +177,12 @@ pipeline {
 
 
   }
-}
+} */
 
 
 // pipeline for Destroying Terraform Infrastructure
 
-/* pipeline {
+pipeline {
   agent any
   stages{
 
@@ -209,4 +209,4 @@ pipeline {
       }
     }
   }
-} */ 
+}  
