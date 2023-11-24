@@ -144,9 +144,11 @@ pipeline {
           sh "ls -l ${privateKeyPath}"
 
           sh "cat ${privateKeyPath}"
+          sh "pwd"
+          sh "ls"
 
           echo "Contents of the remote directory:"
-          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -la ${WORKSPACE}'"
+          sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} 'ls -la ${WORKSPACE}/'"
 
           echo "waiting for EC2 server to initialize" 
           sleep(time: 90, unit: "SECONDS") 
@@ -154,7 +156,6 @@ pipeline {
           sh "ls"
 
           sh "ssh -o StrictHostKeyChecking=no -i ${privateKeyPath} ${ec2Instance} '${dockerCmd}'"
-          sh "ls -l ${privateKeyPath}"
 
           // deployApp "flask_app_project3:${IMAGE_NAME}"
         }
