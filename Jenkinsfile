@@ -91,7 +91,7 @@ pipeline {
             sh "cat private_key_id_rsa"
 
             // Set permissions on private key
-            sh "chmod 600 private_key"
+            sh "chmod 600 private_key_id_rsa"
             
             // Write public key to a file
             sh "echo \"${TERRAFORM_PUBLIC_KEY}\" > public_key_id_rsa.pub"
