@@ -21,7 +21,8 @@ resource "aws_instance" "my_instance" {
 
   associate_public_ip_address = true
 
-  user_data = file("entry-script.sh")
+  # user_data = file("entry-script.sh")
+  user_data = file("${path.module}/entry-script.sh")
 
   # provisioner "file" {
   #   source = "/root/flask-jenkins-deploy/mydockercompose.yml"
