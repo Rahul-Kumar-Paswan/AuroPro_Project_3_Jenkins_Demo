@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Update the system and install Docker
 sudo yum update -y
 sudo amazon-linux-extras install docker -y
