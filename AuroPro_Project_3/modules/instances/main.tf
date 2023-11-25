@@ -21,7 +21,7 @@ resource "aws_instance" "my_instance" {
 
   associate_public_ip_address = true
 
-  # user_data = file("entry-script.sh")
+  user_data = file("entry-script.sh")
 
   # provisioner "file" {
   #   source = "/root/flask-jenkins-deploy/mydockercompose.yml"
@@ -43,21 +43,21 @@ resource "aws_instance" "my_instance" {
   #   ]
   # }
 
-  connection {
-    type        = "ssh"
-    user        = "ec2-user"                      # Replace with the username for your AMI
-    private_key = tls_private_key.ssh_private_key.private_key_pem  # Use the private key directly
-    host        = self.public_ip                 # You can use `self.public_dns` as well
-  }
+  # connection {
+  #   type        = "ssh"
+  #   user        = "ec2-user"                      # Replace with the username for your AMI
+  #   private_key = tls_private_key.ssh_private_key.private_key_pem  # Use the private key directly
+  #   host        = self.public_ip                 # You can use `self.public_dns` as well
+  # }
 
-  provisioner "file" {
-    source = "AuroPro_Project_3/entry-script.sh"
-    destination = "/home/ec2-user/entry-script-on-ec2.sh"
-  }
+  # provisioner "file" {
+  #   source = "AuroPro_Project_3/entry-script.sh"
+  #   destination = "/home/ec2-user/entry-script-on-ec2.sh"
+  # }
 
-  provisioner "remote-exec" {
-    script = file("AuroPro_Project_3/entry-script.sh")
-  }
+  # provisioner "remote-exec" {
+  #   script = file("AuroPro_Project_3/entry-script.sh")
+  # }
 
 }
 
